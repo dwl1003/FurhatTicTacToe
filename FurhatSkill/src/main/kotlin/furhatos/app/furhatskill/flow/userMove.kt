@@ -1,39 +1,29 @@
 package furhatos.app.furhatskill.flow
 
-import furhatos.app.furhatskill.Board
-import furhatos.app.furhatskill.Player
-import furhatos.app.furhatskill.nlu.userMoves
+import furhatos.app.furhatskill.nlu.UserMoves
 import furhatos.flow.kotlin.*
-import furhatos.nlu.common.No
-import furhatos.nlu.common.Yes
-import furhatos.util.*
+
+//This state returns the player's move as an integer to use in the game positioning
 
 val userMove: State = state {
     onEntry {
-        furhat.ask("Where would you like to place your piece?")
+        furhat.ask("Where would you like to place your piece?") //prompt user for move
     }
 
-    onResponse<userMoves>{
+    onResponse<UserMoves>{
         furhat.say("Alright, I'll make my move now")
 
-        if(it.text == "top left")
-            terminate(1)
-        else if(it.text == "top middle")
-            terminate(2)
-        else if(it.text == "top right")
-            terminate(3)
-        else if(it.text == "middle left")
-            terminate(4)
-        else if(it.text == "middle middle")
-            terminate(5)
-        else if(it.text == "middle right")
-            terminate(6)
-        else if(it.text == "bottom left")
-            terminate(7)
-        else if(it.text == "bottom middle")
-            terminate(8)
-        else if(it.text == "bottom right")
-            terminate(9)
+        when (it.text) {
+            "top left" -> terminate(1)
+            "top middle" -> terminate(2)
+            "top right" -> terminate(3)
+            "middle left" -> terminate(4)
+            "middle middle" -> terminate(5)
+            "middle right" -> terminate(6)
+            "bottom left" -> terminate(7)
+            "bottom middle" -> terminate(8)
+            "bottom right" -> terminate(9)
+        }
     }
 
 }

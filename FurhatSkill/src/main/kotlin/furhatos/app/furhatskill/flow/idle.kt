@@ -5,6 +5,7 @@ import furhatos.nlu.common.No
 import furhatos.nlu.common.Yes
 import furhatos.util.*
 import furhatos.app.furhatskill.flow.*
+import furhatos.gestures.Gestures
 
 val Idle: State = state {
 
@@ -16,19 +17,42 @@ val Idle: State = state {
     }
 
     onEntry {
-        furhat.ask("Hi there. Do you want to play a game?")
+        furhat.say {
+            random {
+                block {"Hey, wanna play a game with me?" }
+                block {"Hey there, interested in playing a game?" }
+                block {"Is it game time?" }
+            }
+        }
     }
 
     onResponse<Yes>{
-        furhat.say("Awesome. We will be playing Tic Tac Toe.")
+        furhat.gesture(Gestures.BigSmile)
+        furhat.say {
+            random {
+                block { "Awesome. We will be playing Tic Tac Toe." }
+                block {+Gestures.Wink
+                    +"Cool, good luck playing tic tac toe against me." }
+                block {+Gestures.CloseEyes
+                    +"I hope my programmers did this right. We will be playing Tic Tac Toe." }
+            }
+        }
         goto(tictactoeGame)
-        //furhat.run(furhatos.app.furhatskill.TicTacToe.kt)
     }
 
+
     onResponse<No>{
-        //furhat.gesture(Gestures.Frown)
-        furhat.say("That's sad, I was really hoping to play someone in Tic Tac Toe today.")
-        terminate()
+        furhat.say {
+            random {
+                block {+Gestures.ExpressSad
+                    +"That's sad, I was really hoping to play someone in Tic Tac Toe today." }
+                block {+Gestures.ExpressDisgust
+                    +"I'm not upset, I'm just disappointed. I'll find somebody else then" }
+                block {+Gestures.ExpressAnger
+                    +"That's not cool man, it's probably my birthday and I wanted to play today" }
+            }
+        }
+        reentry()
     }
 
 }

@@ -1,8 +1,5 @@
 package furhatos.app.furhatskill
 
-import furhatos.app.furhatskill.Board
-import furhatos.app.furhatskill.Player
-
 /**
  *
  * Title: Player/p>
@@ -20,12 +17,8 @@ import furhatos.app.furhatskill.Player
  */
 class Player {
     //getters and setters
-    var isBot //checks to see if bot
+    private var isBot //checks to see if bot
             : Boolean
-        private set
-    var isWinner //checks to see if winner
-            : Boolean
-        private set
     var isTurn //checks if it is Player's turn
             = false
         private set
@@ -34,13 +27,11 @@ class Player {
         private set
     var opponent: String? = null
         private set
-    var moveCount: Int
-        private set
+    private var moveCount: Int
 
     constructor() //constructor
     {
         isBot = false
-        isWinner = false
         isTurn = false
         symbol = ""
         moveCount = 0
@@ -49,28 +40,22 @@ class Player {
     constructor(isBot: Boolean, sym: String) //overloaded constructor for player
     { //inputs if player is a bot, their symbol, and the turn
         this.isBot = isBot
-        isWinner = false
         symbol = sym
         moveCount = 0
-        if (symbol === "X") //X always goes furst
-        {
+        if (symbol === "X") {
             isTurn = true
             opponent = "O"
         } else if (symbol === "O") {
             isTurn = false
             opponent = "X"
         } else {
+            //X always goes first
             println("Symbol is invalid")
         }
     }
 
     fun setIsBot(bot: Boolean): Boolean {
         isBot = bot
-        return true
-    }
-
-    fun setIsWinner(winner: Boolean): Boolean {
-        isWinner = winner
         return true
     }
 
@@ -93,12 +78,12 @@ class Player {
         return symbol
     }
 
-    fun resetMoves(): Boolean {
+    private fun resetMoves(): Boolean {
         moveCount = 0
         return true
     }
 
-    fun incrementMoves(): Boolean {
+    private fun incrementMoves(): Boolean {
         moveCount++
         return true
     }
@@ -109,7 +94,7 @@ class Player {
     }
 
     //gets best move based on minimax scores returned
-    fun bestMove(board: Board, depth: Int, player: Player): Int {
+    private fun bestMove(board: Board, depth: Int, player: Player): Int {
         //minimax for the best solution
         var bestScore = -100 //best score for user
         var move = 0
@@ -132,7 +117,7 @@ class Player {
         return move
     }
 
-    fun checkMoves(board: Board): Boolean //checks if there are moves remaining
+    private fun checkMoves(board: Board): Boolean //checks if there are moves remaining
     {
         for (i in 0..8) {
             if (board.getBoardVal(i) === "-") {
@@ -163,7 +148,7 @@ class Player {
      * that section of the tree can be removed to optimize the calculation time.
      * @return
      */
-    fun miniMax(board: Board, depth: Int, player: Player, alpha: Int, beta: Int, maximizing: Boolean): Int {
+    private fun miniMax(board: Board, depth: Int, player: Player, alpha: Int, beta: Int, maximizing: Boolean): Int {
         var alpha = alpha
         var beta = beta
         val score = board.checkScore(player.symbol) //sets score of move
@@ -199,7 +184,7 @@ class Player {
                     }
                 }
             }
-            return topScore - depth //returns best score for recursive score and best move
+            topScore - depth //returns best score for recursive score and best move
         } else  //if it is the user's turn in the simulation
         { //opponent wants you to have the worst score
             var lowScore = 100 //initial high score

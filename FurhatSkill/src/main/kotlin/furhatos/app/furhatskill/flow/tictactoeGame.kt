@@ -88,7 +88,17 @@ val tictactoeGame: State = state() {
                     if (hasWinner === "X") {
                         if(bot.symbol == "X")
                         {
-                            furhat.say("Wow, looks like I won this one. What are the odds")
+                            furhat.ledStrip.solid(java.awt.Color(127,0,0))
+                            furhat.ledStrip.solid(java.awt.Color(0,127,0))
+                            furhat.ledStrip.solid(java.awt.Color(0,0,127))
+                            furhat.gesture(Gestures.BigSmile)
+                            furhat.say {
+                                random {
+                                    block {"Wow, looks like I won this one. What are the odds"}
+                                    block {"I must have gotten lucky, I usually don't do this well"}
+                                    block {"I guess I win, better luck next time."}
+                                }
+                            }
                         }
                         else
                         {
@@ -98,8 +108,17 @@ val tictactoeGame: State = state() {
                     } else if (hasWinner === "O") {
                         if(bot.symbol == "O")
                         {
+                            furhat.ledStrip.solid(java.awt.Color(127,0,0))
+                            furhat.ledStrip.solid(java.awt.Color(0,127,0))
+                            furhat.ledStrip.solid(java.awt.Color(0,0,127))
                             furhat.gesture(Gestures.BigSmile)
-                            furhat.say("Wow, looks like I won this one. What are the odds")
+                            furhat.say {
+                                random {
+                                    block {"Wow, looks like I won this one. What are the odds"}
+                                    block {"I must have gotten lucky, I usually don't do this well"}
+                                    block {"I guess I win, better luck next time."}
+                                }
+                            }
                         }
                         else
                         {
@@ -111,7 +130,6 @@ val tictactoeGame: State = state() {
                         furhat.say("Seems we were evenly matched, this game was a tie")
                         furhat.gesture(Gestures.ExpressAnger)
                         furhat.say("I blame my creators for me not winning")
-                        println("The game ends in a tie")
                         break
                     } else if (player.isTurn && hasWinner === "turn") {
                         player.setIsTurn(false)

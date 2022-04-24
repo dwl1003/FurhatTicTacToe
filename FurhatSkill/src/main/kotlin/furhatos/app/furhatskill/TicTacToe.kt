@@ -94,12 +94,10 @@ object TicTacToe {
             if (hasWinner === "X") {
                 board.printBoard()
                 println("X is the winner")
-                player.setIsWinner(true)
                 break
             } else if (hasWinner === "O") {
                 board.printBoard()
                 println("O is the winner")
-                bot.setIsWinner(true)
                 break
             } else if (hasWinner === "tie") {
                 board.printBoard()

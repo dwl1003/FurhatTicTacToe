@@ -17,7 +17,7 @@ val Idle: State = state {
     }
 
     onEntry {
-        furhat.say {
+        furhat.ask {
             random {
                 block {"Hey, wanna play a game with me?" }
                 block {"Hey there, interested in playing a game?" }

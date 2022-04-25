@@ -10,14 +10,14 @@ import furhatos.util.*
 
 val askRules: State = state{
     onEntry {
-        furhat.ask("Would you like to learn the rules, and directions to play with me?")
+        furhat.ask("Would you like to learn the rules and directions to play with me?")
     }
 
     onResponse<Yes>{
         furhat.say("To play, the rows are the top, middle, and bottom." +
-                "The columns are the left, middle, and right" +
-                "When you tell me your move, tell me a combination of row and column" +
-                "For example, top left, middle middle, or bottom right" +
+                "The columns are the left, middle, and right. " +
+                "When you tell me your move, tell me a combination of row and column. " +
+                "For example, top left, middle middle, or bottom right. " +
                 "Your goal is to get 3 of your symbol in a row, either in a column, in a row," +
                 "or diagonally. Let's start the game!")
         terminate()

@@ -16,12 +16,24 @@ val askSymbol: State = state {
     }
 
     onResponse<UserSymbolX>{
-        furhat.say("Nice, you can go first")
+        furhat.say({
+            random {
+                +"Alright, you can go first"
+                +"Okay, X always goes first, so you'll start us off"
+                +"Cool, you go first."
+            }
+        })
         terminate("X")
     }
 
     onResponse<UserSymbolO>{
-        furhat.say("Alright cool, I'll go first then")
+        furhat.say({
+            random {
+                +"Alright, I'll go first then."
+                +"Okay, X always goes first, so I'll start us off"
+                +"Cool, you can go first."
+            }
+        })
         terminate("O")
     }
 

@@ -8,7 +8,7 @@ import java.util.*
 
 val tictactoeGame: State = state() {
     onEntry {
-                furhat.say("Lets begin. Set up the board.")
+                furhat.say("Let's begin. Set up the tic tac toe board.")
                 call(askRules)
                 //Initialize the board, players, winner string, user choice, and loop booleans
                 val board = Board()
@@ -19,9 +19,9 @@ val tictactoeGame: State = state() {
                 var userChoice: Int
                 var playerMove = false
                 var symbolLoop = true
+                var playAgain = false
 
                 //create a scanner for user input
-                val choice = Scanner(System.`in`)
                 while (symbolLoop) {
                     //println("Choose a symbol (1 for X, 2 for O)")
                     chooseSymbol = call(askSymbol) as String
@@ -64,7 +64,6 @@ val tictactoeGame: State = state() {
                             }
                         } else  //bot's move
                         {
-                            furhat.say("Thinking about my move...")
                             val move = bot.decide(board, 0, bot)
                             board.makeMove(move, bot.symbol)
                             when(move) {
@@ -92,13 +91,13 @@ val tictactoeGame: State = state() {
                             furhat.ledStrip.solid(java.awt.Color(0,127,0))
                             furhat.ledStrip.solid(java.awt.Color(0,0,127))
                             furhat.gesture(Gestures.BigSmile)
-                            furhat.say {
+                            furhat.say({
                                 random {
-                                    block {"Wow, looks like I won this one. What are the odds"}
-                                    block {"I must have gotten lucky, I usually don't do this well"}
-                                    block {"I guess I win, better luck next time."}
+                                        +"Wow, looks like I won this one. What are the odds"
+                                        +"I must have gotten lucky, I usually don't do this well"
+                                        +"I guess I win, better luck next time."
                                 }
-                            }
+                            })
                         }
                         else
                         {
@@ -112,13 +111,13 @@ val tictactoeGame: State = state() {
                             furhat.ledStrip.solid(java.awt.Color(0,127,0))
                             furhat.ledStrip.solid(java.awt.Color(0,0,127))
                             furhat.gesture(Gestures.BigSmile)
-                            furhat.say {
+                            furhat.say({
                                 random {
-                                    block {"Wow, looks like I won this one. What are the odds"}
-                                    block {"I must have gotten lucky, I usually don't do this well"}
-                                    block {"I guess I win, better luck next time."}
+                                    +"Wow, looks like I won this one. What are the odds"
+                                    +"I must have gotten lucky, I usually don't do this well"
+                                    +"I guess I win, better luck next time."
                                 }
-                            }
+                            })
                         }
                         else
                         {
@@ -127,7 +126,13 @@ val tictactoeGame: State = state() {
                         }
                         break
                     } else if (hasWinner === "tie") {
-                        furhat.say("Seems we were evenly matched, this game was a tie")
+                        furhat.say({
+                            random {
+                                +"Seems like we were evenly matched, good game."
+                                +"We tied, but I won't let that happen again."
+                                +"We may have tied, but that's a loss for me."
+                            }
+                        })
                         furhat.gesture(Gestures.ExpressAnger)
                         furhat.say("I blame my creators for me not winning")
                         break
@@ -140,6 +145,17 @@ val tictactoeGame: State = state() {
                     }
                     playerMove = false
                 }
-        goto(Idle)
+        playAgain = call(askPlayAgain) as Boolean
+        if(playAgain)
+        {
+            furhat.gesture(Gestures.BigSmile)
+            furhat.say("Sweet, glad you enjoyed playing with me.")
+            reentry()
+        }
+        else{
+            furhat.say("No worries, I am pretty hard to beat with all the practice I get.")
+            delay(5000)
+            goto(Idle)
+        }
     }
 }

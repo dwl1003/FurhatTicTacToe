@@ -12,28 +12,31 @@ import furhatos.util.*
 
 val askSymbol: State = state {
     onEntry {
-        furhat.ask("Which symbol would you like to be, X or O?")
+        if (users.count > 0) {
+            furhat.attend(users.random)
+        }
+        furhat.ask("Which symbol would you like to be, X or O?", 5000)
     }
 
     onResponse<UserSymbolX>{
-        furhat.say({
+        furhat.say {
             random {
                 +"Alright, you can go first"
                 +"Okay, X always goes first, so you'll start us off"
                 +"Cool, you go first."
             }
-        })
+        }
         terminate("X")
     }
 
     onResponse<UserSymbolO>{
-        furhat.say({
+        furhat.say {
             random {
                 +"Alright, I'll go first then."
                 +"Okay, X always goes first, so I'll start us off"
-                +"Cool, you can go first."
+                +"Cool, I'll make the first move then."
             }
-        })
+        }
         terminate("O")
     }
 

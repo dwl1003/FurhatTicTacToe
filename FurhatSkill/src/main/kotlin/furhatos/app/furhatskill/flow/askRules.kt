@@ -10,7 +10,10 @@ import furhatos.util.*
 
 val askRules: State = state{
     onEntry {
-        furhat.ask("Would you like to learn the rules and directions to play with me?")
+        if (users.count > 0) {
+            furhat.attend(users.random)
+        }
+        furhat.ask("Would you like to learn the rules and directions to play with me?",5000)
     }
 
     onResponse<Yes>{

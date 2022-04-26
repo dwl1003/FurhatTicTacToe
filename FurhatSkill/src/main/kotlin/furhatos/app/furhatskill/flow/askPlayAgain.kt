@@ -10,7 +10,10 @@ import furhatos.util.*
 
 val askPlayAgain: State = state{
     onEntry {
-        furhat.ask("Would you like to play again?")
+        if (users.count > 0) {
+            furhat.attend(users.random)
+        }
+        furhat.ask("Would you like to play again?",5000)
     }
 
     onResponse<Yes>{

@@ -49,7 +49,8 @@ val tictactoeGame: State = state() {
                             if (userChoice == 99) //quits if user enter exit input
                             {
                                 furhat.say("Wow, you must've been really scared to face a genius robot")
-                                terminate()
+                                delay(3000)
+                                goto(Idle)
                             }
                             when (userChoice) {
                                 in 1..9 //checks to make sure choice is in bounds
@@ -68,17 +69,17 @@ val tictactoeGame: State = state() {
                             }
                         } else  //bot's move
                         {
-                            furhat.say({
+                            furhat.say {
                                 random {
                                     +"I'll decide where to play now."
-                                    block{
+                                    block {
                                         +"Give me a second to think."
                                         +delay(1750)
                                         +"Alright. I'm ready."
                                     }
                                     +"Hoowee, what should I do?"
                                 }
-                            })
+                            }
                             val move = bot.decide(board, 0, bot)
                             board.makeMove(move, bot.symbol)
                             when(move) {
@@ -104,16 +105,18 @@ val tictactoeGame: State = state() {
                         if(bot.symbol == "X")
                         {
                             furhat.ledStrip.solid(java.awt.Color(127,0,0))
+                            delay(300)
                             furhat.ledStrip.solid(java.awt.Color(0,127,0))
+                            delay(300)
                             furhat.ledStrip.solid(java.awt.Color(0,0,127))
                             furhat.gesture(Gestures.BigSmile)
-                            furhat.say({
+                            furhat.say {
                                 random {
-                                        +"Wow, looks like I won this one. What are the odds"
-                                        +"I must have gotten lucky, I usually don't do this well"
-                                        +"I guess I win, better luck next time."
+                                    +"Wow, looks like I won this one. What are the odds"
+                                    +"I must have gotten lucky, I usually don't do this well"
+                                    +"I guess I win, better luck next time."
                                 }
-                            })
+                            }
                         }
                         else
                         {
@@ -124,16 +127,18 @@ val tictactoeGame: State = state() {
                         if(bot.symbol == "O")
                         {
                             furhat.ledStrip.solid(java.awt.Color(127,0,0))
+                            delay(300)
                             furhat.ledStrip.solid(java.awt.Color(0,127,0))
+                            delay(300)
                             furhat.ledStrip.solid(java.awt.Color(0,0,127))
                             furhat.gesture(Gestures.BigSmile)
-                            furhat.say({
+                            furhat.say {
                                 random {
                                     +"Wow, looks like I won this one. What are the odds"
                                     +"I must have gotten lucky, I usually don't do this well"
                                     +"I guess I win, better luck next time."
                                 }
-                            })
+                            }
                         }
                         else
                         {
@@ -142,13 +147,13 @@ val tictactoeGame: State = state() {
                         }
                         break
                     } else if (hasWinner === "tie") {
-                        furhat.say({
+                        furhat.say {
                             random {
                                 +"Seems like we were evenly matched, good game."
                                 +"We tied, but I won't let that happen again."
                                 +"We may have tied, but that's a loss for me."
                             }
-                        })
+                        }
                         furhat.gesture(Gestures.ExpressAnger)
                         furhat.say("I blame my programmers for me not winning")
                         break

@@ -7,13 +7,16 @@ import furhatos.flow.kotlin.*
 
 val userMove: State = state {
     onEntry {
+        if (users.count > 0) {
+            furhat.attend(users.random)
+        }
         furhat.ask({
                 random {
                     +"Where would you like to place your piece?"
                     +"Take your time to decide, then tell me where your piece will go."
                     +"Which spot will you put your piece?"
                     }
-                }) //prompt user for move
+                }, 5000) //prompt user for move
         }
 
     onResponse<UserMoves>{

@@ -13,7 +13,7 @@ val askRules: State = state{
         if (users.count > 0) {
             furhat.attend(users.random)
         }
-        furhat.ask("Would you like to learn the rules and directions to play with me?",5000)
+        furhat.ask("Would you like to learn the rules and directions to play with me?")
     }
 
     onResponse<Yes>{

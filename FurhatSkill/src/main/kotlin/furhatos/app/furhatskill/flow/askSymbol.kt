@@ -15,7 +15,7 @@ val askSymbol: State = state {
         if (users.count > 0) {
             furhat.attend(users.random)
         }
-        furhat.ask("Which symbol would you like to be, X or O?", 5000)
+        furhat.ask("Which symbol would you like to be, X or O?")
     }
 
     onResponse<UserSymbolX>{

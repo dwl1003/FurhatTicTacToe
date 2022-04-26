@@ -26,7 +26,7 @@ val Idle: State = state {
                 +"Hey there, interested in playing a game?"
                 +"Is it game time?"
             }
-        },5000)
+        })
     }
 
     onResponse<Yes>{

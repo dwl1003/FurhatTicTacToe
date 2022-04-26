@@ -13,7 +13,7 @@ val askPlayAgain: State = state{
         if (users.count > 0) {
             furhat.attend(users.random)
         }
-        furhat.ask("Would you like to play again?",5000)
+        furhat.ask("Would you like to play again?")
     }
 
     onResponse<Yes>{

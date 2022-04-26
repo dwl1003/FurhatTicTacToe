@@ -16,7 +16,7 @@ val userMove: State = state {
                     +"Take your time to decide, then tell me where your piece will go."
                     +"Which spot will you put your piece?"
                     }
-                }, 5000) //prompt user for move
+                }) //prompt user for move
         }
 
     onResponse<UserMoves>{

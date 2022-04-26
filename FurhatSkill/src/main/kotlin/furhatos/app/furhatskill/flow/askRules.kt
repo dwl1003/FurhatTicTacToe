@@ -14,7 +14,7 @@ val askRules: State = state{
     }
 
     onResponse<Yes>{
-        furhat.say("To play, the rows are the top, middle, and bottom." +
+        furhat.say("To play, the rows are the top, middle, and bottom. " +
                 "The columns are the left, middle, and right. " +
                 "When you tell me your move, tell me a combination of row and column. " +
                 "For example, top left, middle middle, or bottom right. " +

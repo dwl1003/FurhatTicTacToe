@@ -5,12 +5,16 @@ import furhatos.nlu.common.No
 import furhatos.nlu.common.Yes
 import furhatos.util.*
 import furhatos.app.furhatskill.flow.*
+import furhatos.flow.kotlin.voice.PollyNeuralVoice
 import furhatos.gestures.Gestures
 
 val Idle: State = state {
 
     init {
-        furhat.setVoice(Language.ENGLISH_US, Gender.MALE)
+        //furhat.setVoice(Language.ENGLISH_US, Gender.MALE)
+        furhat.voice = PollyNeuralVoice.Matthew()
+        val face = listOf("Alex", "default")
+        furhat.character = "Alex"
         if (users.count > 0) {
             furhat.attend(users.random)
         }

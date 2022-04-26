@@ -17,27 +17,27 @@ val userMove: State = state {
         }
 
     onResponse<UserMoves>{
-        furhat.say({
-            random {
-                +"I'll decide where to play now."
-                block{
-                    +"Give me a second to think."
-                    +delay(3000)
-                }
-                +"Hmm, what should I do?"
-            }
-        })
 
         when (it.text) {
             "top left" -> terminate(1)
             "top middle" -> terminate(2)
+            "top metal" -> terminate(2)
             "top right" -> terminate(3)
             "middle left" -> terminate(4)
+            "metal left" -> terminate(4)
             "middle middle" -> terminate(5)
+            "metal metal" -> terminate(5)
             "middle right" -> terminate(6)
+            "metal right" -> terminate (6)
             "bottom left" -> terminate(7)
             "bottom middle" -> terminate(8)
+            "bottom metal" -> terminate(8)
             "bottom right" -> terminate(9)
+            "quit" -> terminate(99)
+            else -> {
+                furhat.say("Sorry, my microphone did not pick that up well. Try again.")
+                reentry()
+            }
         }
     }
 

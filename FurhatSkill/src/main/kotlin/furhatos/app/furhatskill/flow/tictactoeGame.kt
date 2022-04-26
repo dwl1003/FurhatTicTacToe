@@ -59,11 +59,26 @@ val tictactoeGame: State = state() {
                                 else  //loops if input it out of bounds
                                 -> {
                                     playerMove = false
-                                    furhat.say("You have to choose a move inside one through nine")
+                                    furhat.say("You have to choose a spot that isn't already taken.")
                                 }
+                            }
+                            if(!playerMove)
+                            {
+                                furhat.say("You have to choose a spot that isn't already taken.")
                             }
                         } else  //bot's move
                         {
+                            furhat.say({
+                                random {
+                                    +"I'll decide where to play now."
+                                    block{
+                                        +"Give me a second to think."
+                                        +delay(1750)
+                                        +"Alright. I'm ready."
+                                    }
+                                    +"Hoowee, what should I do?"
+                                }
+                            })
                             val move = bot.decide(board, 0, bot)
                             board.makeMove(move, bot.symbol)
                             when(move) {
@@ -85,6 +100,7 @@ val tictactoeGame: State = state() {
 
                     //end of game cases, or swaps turn
                     if (hasWinner === "X") {
+                        delay(500)
                         if(bot.symbol == "X")
                         {
                             furhat.ledStrip.solid(java.awt.Color(127,0,0))
@@ -134,7 +150,7 @@ val tictactoeGame: State = state() {
                             }
                         })
                         furhat.gesture(Gestures.ExpressAnger)
-                        furhat.say("I blame my creators for me not winning")
+                        furhat.say("I blame my programmers for me not winning")
                         break
                     } else if (player.isTurn && hasWinner === "turn") {
                         player.setIsTurn(false)
@@ -150,6 +166,7 @@ val tictactoeGame: State = state() {
         {
             furhat.gesture(Gestures.BigSmile)
             furhat.say("Sweet, glad you enjoyed playing with me.")
+            delay(1000)
             reentry()
         }
         else{
